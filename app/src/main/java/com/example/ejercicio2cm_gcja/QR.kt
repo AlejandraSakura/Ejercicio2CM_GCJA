@@ -102,7 +102,31 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
         }
 /////// Hasta aqui funciona
         //                      QR MAIL
+        try{
+            //-------------------------------------------------------------------
+//            for email intent
+            val listEmail = scanResult.split(":")
+            var ei = Intent(Intent.ACTION_VIEW)
+            ei.setData(Uri.parse("mailto:"))
+            ei.putExtra(Intent.EXTRA_EMAIL,listEmail[2])
+            ei.putExtra(Intent.EXTRA_SUBJECT,listEmail[4])
+            ei.putExtra(Intent.EXTRA_TEXT,listEmail[6])
+            startActivity(ei)
+            finish()
 
+
+        }catch(e: Exception){
+            AlertDialog.Builder(this@QR)
+                .setTitle("Error")
+                .setMessage("El codigo QR no es valido para la aplicacion")
+                .setPositiveButton(
+                    "Aceptar", DialogInterface.OnClickListener { dialogInterface, i ->
+                    dialogInterface.dismiss()
+                    finish()
+                })
+                .create()
+                .show()
+        }
 
 /////// A partir de  aqui funciona
     }
