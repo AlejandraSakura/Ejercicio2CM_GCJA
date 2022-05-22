@@ -80,29 +80,11 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
         //                      QR SMS
         try {
-            /*val qrsms = scanResult.split(":")
-            var i2 = Intent(Intent.ACTION_VIEW)
-            i2.setData(Uri.parse("para:"+qrsms[1]))
-            i2.putExtra("cuerposms",qrsms[2])
-            startActivity(i2)
-            finish()
-
-        }catch(e:Exception){
-            AlertDialog.Builder(this@QR)
-                .setTitle("Error")
-                .setMessage("El codigo QR no es valido para la aplicacion")
-                .setPositiveButton("Aceptar",DialogInterface.OnClickListener { dialogInterface, i2 ->
-                    dialogInterface.dismiss()
-                    finish()
-                })
-                .create()
-                .show()
-        }*/
             val list = scanResult.split(":")
-            var smsIntent = Intent(Intent.ACTION_VIEW)
-            smsIntent.setData(Uri.parse("smsto:"+list[1]))
-            smsIntent.putExtra("sms_body",list[2])
-            startActivity(smsIntent)
+            var smsi = Intent(Intent.ACTION_VIEW)
+            smsi.setData(Uri.parse("smsto:"+list[1]))
+            smsi.putExtra("sms_body",list[2])
+            startActivity(smsi)
             finish()
 
         }catch(e:Exception) {
@@ -118,10 +100,11 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
                 .create()
                 .show()
         }
+/////// Hasta aqui funciona
+        //                      QR MAIL
 
 
-
-
+/////// A partir de  aqui funciona
     }
     ///////////////////////////////////////////////////////////////////////////////////////
     override fun onResume() {
