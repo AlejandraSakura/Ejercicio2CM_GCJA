@@ -80,7 +80,7 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
         //                      QR SMS
         try {
-            val qrsms = scanResult.split(":")
+            /*val qrsms = scanResult.split(":")
             var i2 = Intent(Intent.ACTION_VIEW)
             i2.setData(Uri.parse("para:"+qrsms[1]))
             i2.putExtra("cuerposms",qrsms[2])
@@ -91,70 +91,39 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
             AlertDialog.Builder(this@QR)
                 .setTitle("Error")
                 .setMessage("El codigo QR no es valido para la aplicacion")
-                .setPositiveButton("Aceptar",DialogInterface.OnClickListener { dialogInterface, i ->
+                .setPositiveButton("Aceptar",DialogInterface.OnClickListener { dialogInterface, i2 ->
                     dialogInterface.dismiss()
                     finish()
                 })
                 .create()
                 .show()
-        }
-        //                      QR Mail
-        try {
-            val emailqr = scanResult.split(":")
-            var i3 = Intent(Intent.ACTION_VIEW)
-            i3.setData(Uri.parse("mailto:"))
-            i3.putExtra(Intent.EXTRA_EMAIL,emailqr[2])
-            i3.putExtra(Intent.EXTRA_SUBJECT,emailqr[4])
-            i3.putExtra(Intent.EXTRA_TEXT,emailqr[6])
-            startActivity(i3)
+        }*/
+            val list = scanResult.split(":")
+            var smsIntent = Intent(Intent.ACTION_VIEW)
+            smsIntent.setData(Uri.parse("smsto:"+list[1]))
+            smsIntent.putExtra("sms_body",list[2])
+            startActivity(smsIntent)
             finish()
 
-        }catch(e:Exception){
+        }catch(e:Exception) {
             AlertDialog.Builder(this@QR)
                 .setTitle("Error")
                 .setMessage("El codigo QR no es valido para la aplicacion")
-                .setPositiveButton("Aceptar",DialogInterface.OnClickListener { dialogInterface, i ->
-                    dialogInterface.dismiss()
-                    finish()
-                })
+                .setPositiveButton(
+                    "Aceptar",
+                    DialogInterface.OnClickListener { dialogInterface, i ->
+                        dialogInterface.dismiss()
+                        finish()
+                    })
                 .create()
                 .show()
         }
 
-        //                      QR VCard
-        try {
-            var parsedResult = ResultParser.parseResult(p0) as AddressBookParsedResult
-            var nValue = parsedResult.names
-            var nkValue = parsedResult.nicknames
-            var eValue = parsedResult.emails
-            var etValue = parsedResult.emailTypes
-            var phValue = parsedResult.phoneNumbers
-            var phtValue = parsedResult.phoneTypes
-            val i4 = Intent(Intent.ACTION_INSERT).apply {
-                type = ContactsContract.Contacts.CONTENT_TYPE
-                putExtra(ContactsContract.Intents.Insert.PHONETIC_NAME, nkValue)
-                putExtra(ContactsContract.Intents.Insert.NAME, nValue)
-                putExtra(ContactsContract.Intents.Insert.EMAIL,eValue)
-                putExtra(ContactsContract.Intents.Insert.EMAIL_TYPE,etValue)
-                putExtra(ContactsContract.Intents.Insert.PHONE,phValue)
-                putExtra(ContactsContract.Intents.Insert.PHONE_TYPE,phtValue)
-            }
-            startActivity(intent)
 
-        }catch(e:Exception){
-            AlertDialog.Builder(this@QR)
-                .setTitle("Error")
-                .setMessage("El codigo QR no es valido para la aplicacion")
-                .setPositiveButton("Aceptar",DialogInterface.OnClickListener { dialogInterface, i ->
-                    dialogInterface.dismiss()
-                    finish()
-                })
-                .create()
-                .show()
-        }
+
 
     }
-///////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////
     override fun onResume() {
         super.onResume()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
