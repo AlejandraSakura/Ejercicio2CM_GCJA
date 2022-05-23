@@ -100,7 +100,7 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
                 .create()
                 .show()
         }
-/////// Hasta aqui funciona
+///////
         //                      QR MAIL
         try{
             //-------------------------------------------------------------------
@@ -128,7 +128,9 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
                 .show()
         }
 
-/////// A partir de  aqui funciona
+
+
+///////
     }
     ///////////////////////////////////////////////////////////////////////////////////////
     override fun onResume() {
