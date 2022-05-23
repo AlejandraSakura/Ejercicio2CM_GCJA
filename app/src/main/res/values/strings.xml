@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Ejercicio2CM_GCJA</string>
+    <string name="Error">Error</string>
+    <string name="Aceptar">Aceptar</string>
+    <string name="CodigoInvalido">El codigo QR no es valido para la aplicacion</string>
+    <string name="PermisoRequerido">Permiso requerido</string>
+    <string name="AccesoCamara">Se necesita acceder a la camara para leer los codigos QR</string>
+    <string name="Cancelar">Cancelar</string>
+    <string name="NoAcceso">"El permiso de la camara no se ha concedido"</string>
+    ""
+
+
 </resources>

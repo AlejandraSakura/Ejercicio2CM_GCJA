@@ -68,9 +68,9 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
             finish()
         }catch (e : MalformedURLException){
             AlertDialog.Builder(this@QR)
-                .setTitle("Error")
-                .setMessage("El codigo QR no es valido para la aplicacion")
-                .setPositiveButton("Aceptar",DialogInterface.OnClickListener { dialogInterface, i ->
+                .setTitle(R.string.Error)
+                .setMessage(R.string.CodigoInvalido)
+                .setPositiveButton(R.string.Aceptar,DialogInterface.OnClickListener { dialogInterface, i ->
                     dialogInterface.dismiss()
                     finish()
                 })
@@ -89,10 +89,10 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
         }catch(e:Exception) {
             AlertDialog.Builder(this@QR)
-                .setTitle("Error")
-                .setMessage("El codigo QR no es valido para la aplicacion")
+                .setTitle(R.string.Error)
+                .setMessage(R.string.CodigoInvalido)
                 .setPositiveButton(
-                    "Aceptar",
+                    R.string.Aceptar,
                     DialogInterface.OnClickListener { dialogInterface, i ->
                         dialogInterface.dismiss()
                         finish()
@@ -117,10 +117,10 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
         }catch(e: Exception){
             AlertDialog.Builder(this@QR)
-                .setTitle("Error")
-                .setMessage("El codigo QR no es valido para la aplicacion")
+                .setTitle(R.string.Error)
+                .setMessage(R.string.CodigoInvalido)
                 .setPositiveButton(
-                    "Aceptar", DialogInterface.OnClickListener { dialogInterface, i ->
+                    R.string.Aceptar, DialogInterface.OnClickListener { dialogInterface, i ->
                     dialogInterface.dismiss()
                     finish()
                 })
@@ -166,19 +166,19 @@ class QR : AppCompatActivity(), ZXingScannerView.ResultHandler {
                         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                             if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
                                 AlertDialog.Builder(this@QR)
-                                    .setTitle("Permiso requerido")
-                                    .setMessage("Se necesita acceder a la camara para leer los codigos QR")
-                                    .setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialogInterface, i ->
+                                    .setTitle(R.string.PermisoRequerido)
+                                    .setMessage(R.string.AccesoCamara)
+                                    .setPositiveButton(R.string.Aceptar, DialogInterface.OnClickListener { dialogInterface, i ->
                                         requestPermissions(arrayOf(Manifest.permission.CAMERA),PERMISO_CAMARA)
                                     })
-                                    .setNegativeButton("Cancelar", DialogInterface.OnClickListener { dialogInterface, i ->
+                                    .setNegativeButton(R.string.Cancelar, DialogInterface.OnClickListener { dialogInterface, i ->
                                         dialogInterface.dismiss()
                                         finish()
                                     })
                                     .create()
                                     .show()
                             }else {
-                                Toast.makeText(this@QR, "El permiso de la camara no se ha concedido",Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@QR, R.string.NoAcceso,Toast.LENGTH_LONG).show()
                                 finish()
                             }
                         }
